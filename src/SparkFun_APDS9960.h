@@ -17,7 +17,7 @@
 #include "Arduino.h"
 
 /* Debug */
-#define DEBUG                   0
+#define DEBUG_LIB               0
 
 /* APDS-9960 I2C address */
 #define APDS9960_I2C_ADDR       0x39
@@ -28,7 +28,7 @@
 #define GESTURE_SENSITIVITY_2   20
 
 /* Error code for returned values */
-#define ERROR                   0xFF
+#define ERROR_LIB                0xFF
 
 /* Acceptable device IDs */
 #define APDS9960_ID_1           0xAB

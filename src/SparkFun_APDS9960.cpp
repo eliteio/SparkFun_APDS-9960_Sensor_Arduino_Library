@@ -209,7 +209,7 @@ uint8_t SparkFun_APDS9960::getMode()
 
     /* Read current ENABLE register */
     if( !wireReadDataByte(APDS9960_ENABLE, enable_value) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     return enable_value;
@@ -228,7 +228,7 @@ bool SparkFun_APDS9960::setMode(uint8_t mode, uint8_t enable)
 
     /* Read current ENABLE register */
     reg_val = getMode();
-    if( reg_val == ERROR ) {
+    if( reg_val == ERROR_LIB ) {
         return false;
     }
 
@@ -442,7 +442,7 @@ bool SparkFun_APDS9960::isGestureAvailable()
 
     /* Read value from GSTATUS register */
     if( !wireReadDataByte(APDS9960_GSTATUS, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out GVALID bit */
@@ -483,7 +483,7 @@ int SparkFun_APDS9960::readGesture()
 
         /* Get the contents of the STATUS register. Is data still valid? */
         if( !wireReadDataByte(APDS9960_GSTATUS, gstatus) ) {
-            return ERROR;
+            return ERROR_LIB;
         }
 
         /* If we have valid data, read in FIFO */
@@ -491,7 +491,7 @@ int SparkFun_APDS9960::readGesture()
 
             /* Read the current FIFO level */
             if( !wireReadDataByte(APDS9960_GFLVL, fifo_level) ) {
-                return ERROR;
+                return ERROR_LIB;
             }
 
 #if DEBUG
@@ -505,7 +505,7 @@ int SparkFun_APDS9960::readGesture()
                                                 (uint8_t*)fifo_data,
                                                 (fifo_level * 4) );
                 if( bytes_read == -1 ) {
-                    return ERROR;
+                    return ERROR_LIB;
                 }
 #if DEBUG
                 Serial.print("FIFO Dump: ");
@@ -1097,7 +1097,7 @@ uint8_t SparkFun_APDS9960::getLEDDrive()
 
     /* Read value from CONTROL register */
     if( !wireReadDataByte(APDS9960_CONTROL, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out LED drive bits */
@@ -1158,7 +1158,7 @@ uint8_t SparkFun_APDS9960::getProximityGain()
 
     /* Read value from CONTROL register */
     if( !wireReadDataByte(APDS9960_CONTROL, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out PDRIVE bits */
@@ -1219,7 +1219,7 @@ uint8_t SparkFun_APDS9960::getAmbientLightGain()
 
     /* Read value from CONTROL register */
     if( !wireReadDataByte(APDS9960_CONTROL, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out ADRIVE bits */
@@ -1279,7 +1279,7 @@ uint8_t SparkFun_APDS9960::getLEDBoost()
 
     /* Read value from CONFIG2 register */
     if( !wireReadDataByte(APDS9960_CONFIG2, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out LED_BOOST bits */
@@ -1334,7 +1334,7 @@ uint8_t SparkFun_APDS9960::getProxGainCompEnable()
 
     /* Read value from CONFIG3 register */
     if( !wireReadDataByte(APDS9960_CONFIG3, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out PCMP bits */
@@ -1390,7 +1390,7 @@ uint8_t SparkFun_APDS9960::getProxPhotoMask()
 
     /* Read value from CONFIG3 register */
     if( !wireReadDataByte(APDS9960_CONFIG3, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Mask out photodiode enable mask bits */
@@ -1515,7 +1515,7 @@ uint8_t SparkFun_APDS9960::getGestureGain()
 
     /* Read value from GCONF2 register */
     if( !wireReadDataByte(APDS9960_GCONF2, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out GGAIN bits */
@@ -1576,7 +1576,7 @@ uint8_t SparkFun_APDS9960::getGestureLEDDrive()
 
     /* Read value from GCONF2 register */
     if( !wireReadDataByte(APDS9960_GCONF2, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out GLDRIVE bits */
@@ -1641,7 +1641,7 @@ uint8_t SparkFun_APDS9960::getGestureWaitTime()
 
     /* Read value from GCONF2 register */
     if( !wireReadDataByte(APDS9960_GCONF2, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Mask out GWTIME bits */
@@ -1877,7 +1877,7 @@ uint8_t SparkFun_APDS9960::getAmbientLightIntEnable()
 
     /* Read value from ENABLE register */
     if( !wireReadDataByte(APDS9960_ENABLE, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out AIEN bit */
@@ -1926,7 +1926,7 @@ uint8_t SparkFun_APDS9960::getProximityIntEnable()
 
     /* Read value from ENABLE register */
     if( !wireReadDataByte(APDS9960_ENABLE, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out PIEN bit */
@@ -1975,7 +1975,7 @@ uint8_t SparkFun_APDS9960::getGestureIntEnable()
 
     /* Read value from GCONF4 register */
     if( !wireReadDataByte(APDS9960_GCONF4, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Shift and mask out GIEN bit */
@@ -2054,7 +2054,7 @@ uint8_t SparkFun_APDS9960::getGestureMode()
 
     /* Read value from GCONF4 register */
     if( !wireReadDataByte(APDS9960_GCONF4, val) ) {
-        return ERROR;
+        return ERROR_LIB;
     }
 
     /* Mask out GMODE bit */
